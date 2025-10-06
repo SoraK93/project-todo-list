@@ -24,7 +24,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, "dist"),
-    publicPath: '/project-restaurant-page/',
+    publicPath: '/',
     clean: true,
   },
 };

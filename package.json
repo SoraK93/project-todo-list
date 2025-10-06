@@ -1,14 +1,14 @@
 {
-  "name": "project-restaurant-page",
+  "name": "project-todo-list",
   "version": "1.0.0",
   "description": "This project is based on the webpack lesson",
-  "homepage": "https://sorak93.github.io/project-restaurant-page",
+  "homepage": "https://sorak93.github.io/project-todo-list",
   "bugs": {
-    "url": "https://github.com/SoraK93/project-restaurant-page/issues"
+    "url": "https://github.com/SoraK93/project-todo-list/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/SoraK93/project-restaurant-page.git"
+    "url": "https://github.com/SoraK93/project-todo-list.git"
   },
   "license": "ISC",
   "author": "",
