@@ -1,5 +1,8 @@
+import { v4 as uuid4} from "uuid";
+
 export class Todo {
   // private properties
+  #id;
   #title;
   #description;
   #note;
@@ -7,6 +10,7 @@ export class Todo {
   #priority;
 
   constructor() {
+    this.#id = uuid4();
     this.#title = null;
     this.#description = null;
     this.#note = null;
@@ -15,6 +19,10 @@ export class Todo {
   }
 
   // Getter Functions
+  get id() {
+    return this.#id
+  }
+
   get title() {
     return this.#title;
   }
@@ -36,6 +44,7 @@ export class Todo {
   }
 
   // Setter Functions
+  /**@param {String} value  */
   set title(value) {
     if (value.length > 100) {
       throw new Error("Title can have 100 characters max.");
@@ -46,6 +55,7 @@ export class Todo {
     }
   }
 
+  /**@param {String} value  */
   set description(value) {
     if (value.length > 1000) {
       throw new Error("Description can have 1000 characters max.");
@@ -54,6 +64,7 @@ export class Todo {
     }
   }
 
+  /**@param {String} value  */
   set note(value) {
     if (value.length > 200) {
       throw new Error("note can have 200 characters max.");
@@ -62,6 +73,7 @@ export class Todo {
     }
   }
 
+  /**@param {Date} value  */
   set dueDate(value) {
     let today = new Date();
     let dueDate = new Date(value);
@@ -72,6 +84,7 @@ export class Todo {
     }
   }
 
+  /**@param {String} value  */
   set priority(value) {
     this.#priority = value;
   }
