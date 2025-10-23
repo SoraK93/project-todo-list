@@ -1,25 +1,20 @@
-import { sectionProject } from "./utilities/cachingDOM";
-import { headingContainer, formContainer } from "./utilities/createFormElement";
-import { projectHeadContainer, todoListContainer } from "./utilities/createToDoListElement";
+import {
+  headingContainer,
+  formContainer,
+  projectHeadContainer,
+  todoListContainer,
+} from "./utilities/createElement";
 
-export const changePage = function (e) {
-  if (e.target.innerText === "Create New Project") {
-    formPage(e.target, sectionProject)
-  } else {
-    toDoPage(e.target, sectionProject)
-  }
+export const formPage = function (button, parentElement, text) {
+  button.innerText = text;
+  parentElement.innerHTML = "";
+  parentElement.appendChild(headingContainer);
+  parentElement.appendChild(formContainer);
 };
 
-const formPage = function (button, parentElement) {
-  button.innerText = "Go To Home"
-  parentElement.innerHTML = ""
-  parentElement.appendChild(headingContainer)
-  parentElement.appendChild(formContainer)
-};
-
-export const toDoPage = function (button, parentElement) {
-  button.innerText = "Create New Project";
-  parentElement.innerHTML = ""
-  parentElement.appendChild(projectHeadContainer)
-  parentElement.appendChild(todoListContainer)
+export const toDoPage = function (button, parentElement, text) {
+  button.innerText = text;
+  parentElement.innerHTML = "";
+  parentElement.appendChild(projectHeadContainer);
+  parentElement.appendChild(todoListContainer);
 };

@@ -5,10 +5,10 @@ export const formFieldCreation = function (formElement) {
    *  @param {string} [field="input"] - sets the type of form field (default="input")
    */
   function createFormField(name, type, field = "input") {
-    formElement.appendChild(createInputField(name, type, field));
+    formElement.appendChild(createField(name, type, field));
   }
 
-  function createInputField(name, type = "text", field = "input") {
+  function createField(name, type = "text", field = "input") {
     let userInputElement;
     const element = document.createElement("label");
     element.setAttribute("for", name);
