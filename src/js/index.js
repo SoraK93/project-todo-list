@@ -1,16 +1,16 @@
 import "../css/style.css";
 import "../template.html";
+import { changePage, toDoPage } from "./createProjectPage";
+import { sectionProject, createProjectButton } from "./utilities/cachingDOM";
 import { project } from "./project";
-import { createProjectForm } from "./createPageElements";
 
+// starting page
+toDoPage(createProjectButton, sectionProject)
+
+createProjectButton.addEventListener("click", changePage)
+
+// example testing new project creation
+// require some way to get the todo object in here
 const newProject = project();
 newProject.createNewProject({ title: "Lets Todo" });
-
-const newProject2 = project();
-newProject2.createNewProject({ title: "Lets Todo 2" });
-
-document.querySelector(".project").appendChild(createProjectForm)
-
-console.log(newProject.reviewProject()[0].title);
-console.log(newProject2.reviewProject()[0].title);
 
