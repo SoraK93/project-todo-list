@@ -51,8 +51,8 @@ export const toDoCreation = (function () {
 
     const detailContainer = createElementContainer(toDoContainer, "div");
     createElementContainer(detailContainer, "h3", toDoObject.name);
-    createElementContainer(detailContainer, "p", toDoObject.description);
     createElementContainer(detailContainer, "p", toDoObject.date);
+    createElementContainer(detailContainer, "p", toDoObject.note);
 
     const completeBtn = createElementContainer(toDoContainer, "button", "Complete")
     completeBtn.setAttribute("type", "button")

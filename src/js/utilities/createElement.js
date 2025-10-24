@@ -39,7 +39,19 @@ todoListContainer.className = "todoList";
 // todoObject = {name, date, description, priority}
 createToDo(todoListContainer, {
   name: "ToDo1",
-  description: "My new ToDo task",
+  note: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero recusandae fugiat magnam, laborum quas inventore qui unde doloribus!",
   date: "23.10.2025",
   priority: "High"
+})
+createToDo(todoListContainer, {
+  name: "ToDo1",
+  note: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero recusandae fugiat magnam, laborum quas inventore qui unde doloribus!",
+  date: "23.10.2025",
+  priority: "Medium"
+})
+createToDo(todoListContainer, {
+  name: "ToDo1",
+  note: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero recusandae fugiat magnam, laborum quas inventore qui unde doloribus!",
+  date: "23.10.2025",
+  priority: "Low"
 })

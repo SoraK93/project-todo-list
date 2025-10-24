@@ -1,5 +1,17 @@
 :root {
   font-size: calc(16px * 0.625);
+  --sidebar-width: 250px;
+  --bg-main-content: rgb(42, 112, 202);
+  --bg-todo: rgb(50, 169, 205);
+  --bg-todo-title-high: rgb(226, 82, 82);
+  --bg-todo-title-medium: rgb(253, 183, 103);
+  --bg-todo-title-low: rgb(32, 189, 32);
+  --bg-todo-date: rgb(171, 171, 173);
+  --bg-todo-shadow: rgb(0, 0, 0);
+  --bg-button-high: rgb(255, 216, 216);
+  --bg-button-medium: rgb(255, 237, 216);
+  --bg-button-low: rgb(216, 255, 216);
+  --bg-button-shadow: rgb(0, 0, 0);
 }
 
 *,
@@ -18,27 +30,19 @@ body {
 }
 
 main {
-  display: grid;
-  grid-template-columns: 200px 100%;
   height: 100%;
 }
 
 hr {
-  height: 1em;
-  background-color: black;
   width: 100%;
-}
-
-button {
-  cursor: pointer;
-  width: 100%;
-  padding: 1em;
 }
 
 /* sidebar */
 .sidebar {
+  width: var(--sidebar-width);
   position: fixed;
   height: 100%;
+  background-color: var(--bg-main-content);
 }
 .createProject {
   margin: 0 auto;
@@ -51,10 +55,9 @@ button {
 /* main content */
 .project {
   position: absolute;
-  left: 200px;
-  background-color: green;
+  left: var(--sidebar-width);
   padding: 1em;
-  width: calc(100% - 200px);
+  width: calc(100% - var(--sidebar-width));
 }
 
 .projectHead {
@@ -63,18 +66,81 @@ button {
   margin-bottom: 1em;
 }
 
+/* todolist */
 .todoList {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 10px;
+  gap: 1em;
 }
 
 .todo div {
-  background-color: yellowgreen;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
   cursor: pointer;
+  padding: 1em;
+  box-shadow: 1px 1px 3px 1px var(--bg-todo-shadow);
+}
+
+.todo div:active {
+  box-shadow: -1px -1px 3px 1px var(--bg-todo-shadow) inset;
+}
+
+.todo h3 {
+  font-size: 3.5rem;
+  margin-bottom: 0.5em;
+  text-decoration: underline;
+}
+
+.todo p {
+  text-align: justify;
+  font-size: 2rem;
+  &:nth-child(2) {
+    color: var(--bg-todo-date);
+    text-align: right;
+  }
+}
+
+.todo.High h3 {
+  color: var(--bg-todo-title-high);
+}
+
+.todo.Medium h3 {
+  color: var(--bg-todo-title-medium);
+}
+
+.todo.Low h3 {
+  color: var(--bg-todo-title-low);
 }
 
 .todoDetails {
   grid-row: 1;
   grid-column: 1/ 6;
+}
+
+/* button */
+.High button {
+  background-color: var(--bg-button-high);
+}
+
+.Medium button {
+  background-color: var(--bg-button-medium);
+}
+
+.Low button {
+  background-color: var(--bg-button-low);
+}
+
+button {
+  cursor: pointer;
+  width: 100%;
+  padding: 1em;
+  background-color: var(--bg-todo);
+  box-shadow: 1px 1px 2px 1px var(--bg-button-shadow);
+  font-size: 1.8rem;
+}
+
+button:active {
+  box-shadow: -1px -1px 2px 1px var(--bg-button-shadow) inset;
 }
