@@ -1,4 +1,4 @@
-import { v4 as uuid4} from "uuid";
+import { v4 as uuid4 } from "uuid";
 
 export class Todo {
   // private properties
@@ -20,7 +20,7 @@ export class Todo {
 
   // Getter Functions
   get id() {
-    return this.#id
+    return this.#id;
   }
 
   get title() {
@@ -68,6 +68,8 @@ export class Todo {
   set note(value) {
     if (value.length > 200) {
       throw new Error("note can have 200 characters max.");
+    }else if (value.length === 0) {
+      throw new Error("Note cannot be empty.");
     } else {
       this.#note = value;
     }
@@ -75,8 +77,10 @@ export class Todo {
 
   /**@param {Date} value  */
   set dueDate(value) {
-    let today = new Date();
-    let dueDate = new Date(value);
+    const option = { year: "numeric", month: "numeric", day: "numeric" };
+    let today = new Date().toLocaleDateString("en-IN", option);
+    let dueDate = new Date(value).toLocaleDateString("en-IN", option);
+
     if (dueDate < today) {
       throw new Error("Due date can be today or upcomming date.");
     } else {
@@ -87,5 +91,16 @@ export class Todo {
   /**@param {String} value  */
   set priority(value) {
     this.#priority = value;
+  }
+
+  toJSON() {
+    return {
+      id: this.#id,
+      title: this.#title,
+      description: this.#description,
+      note: this.#note,
+      dueDate: this.#dueDate,
+      priority: this.#priority,
+    };
   }
 }

@@ -12,6 +12,8 @@
   --bg-button-medium: rgb(255, 237, 216);
   --bg-button-low: rgb(216, 255, 216);
   --bg-button-shadow: rgb(0, 0, 0);
+  --bg-form-input: rgb(211, 255, 249);
+  --bg-form-input-border: rgb(128, 128, 128);
 }
 
 *,
@@ -29,10 +31,6 @@ body {
   font-size: 2rem;
 }
 
-main {
-  height: 100%;
-}
-
 hr {
   width: 100%;
 }
@@ -43,6 +41,7 @@ hr {
   position: fixed;
   height: 100%;
   background-color: var(--bg-main-content);
+  overflow: scroll;
 }
 .createProject {
   margin: 0 auto;
@@ -52,12 +51,27 @@ hr {
   padding: 1em;
 }
 
+.projectList ol {
+  margin-top: 1em;
+}
+
+li {
+  list-style-type: none;
+  cursor: pointer;
+  padding: 1em;
+  border-radius: 20px;
+  font-size: 2.5rem;
+  margin-top: 0.5em;
+  background-color: aliceblue;
+}
+
 /* main content */
 .project {
   position: absolute;
   left: var(--sidebar-width);
   padding: 1em;
   width: calc(100% - var(--sidebar-width));
+  height: 100%;
 }
 
 .projectHead {
@@ -80,11 +94,11 @@ hr {
   align-items: center;
   cursor: pointer;
   padding: 1em;
-  box-shadow: 1px 1px 3px 1px var(--bg-todo-shadow);
+  box-shadow: 1px 1px 2px 1px var(--bg-todo-shadow);
 }
 
 .todo div:active {
-  box-shadow: -1px -1px 3px 1px var(--bg-todo-shadow) inset;
+  box-shadow: -1px -1px 2px 1px var(--bg-todo-shadow) inset;
 }
 
 .todo h3 {
@@ -135,12 +149,52 @@ hr {
 button {
   cursor: pointer;
   width: 100%;
-  padding: 1em;
+  padding: 1em 0.5em;
   background-color: var(--bg-todo);
   box-shadow: 1px 1px 2px 1px var(--bg-button-shadow);
-  font-size: 1.8rem;
+  font-size: 2rem;
 }
 
 button:active {
   box-shadow: -1px -1px 2px 1px var(--bg-button-shadow) inset;
 }
+
+/* form */
+.formField {
+  display: flex;
+  justify-content: center;
+}
+
+form {
+  margin: 2em;
+  width: 50%;
+}
+
+form div {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  margin: 1em 0;
+}
+
+form div.addButton {
+  display: block;
+  width: 64%;
+  margin-left: auto;
+}
+
+form input, select, textarea {
+  border-bottom: 1px solid grey;
+  background: var(--bg-form-input);
+  color: rgb(80, 78, 78);
+  font-size: 2rem;
+  padding: 0.3em;
+}
+
+form select#priority  {
+  border: solid 1px var(--bg-form-input-border);
+}
+
+form textarea {
+  resize: vertical;
+}
+

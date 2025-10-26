@@ -1,5 +1,6 @@
 export const DOMCache = (function () {
   const sectionProject = document.querySelector(".project");
   const createProjectButton = document.querySelector(".createProject button");
-  return { sectionProject, createProjectButton };
+  const projectList = document.querySelector(".projectList ol")
+  return { sectionProject, createProjectButton, projectList };
 })();
