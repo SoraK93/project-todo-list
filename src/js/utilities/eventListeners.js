@@ -9,7 +9,7 @@ const { sectionProject, createProjectButton, projectList } = DOMCache;
 export const createProjectListener = (e) => {
   let text = "Create New Project";
   if (e.target.innerText === text) {
-    const { formBtn } = setupFormPage(e.target, sectionProject, "Go To Home");
+    const { formBtn } = setupFormPage(e.target, sectionProject);
 
     const form = formBtn.parentNode.parentNode;
     if (form.children.length !== 7) {
@@ -19,7 +19,11 @@ export const createProjectListener = (e) => {
 
     setupPageHeading(text);
   } else {
-    setupToDoPage(e.target, sectionProject, text, getKeys());
+    try {
+      setupToDoPage(e.target, sectionProject, getKeys());
+    } catch (err) {
+      alert("Error: No active project detect.\nPlease add a new project.");
+    }
   }
 
   sidebar(projectList);
@@ -29,31 +33,83 @@ export const createProjectListener = (e) => {
 export const projectListListener = (e) => {
   e.stopPropagation();
 
-  setupToDoPage(
-    createProjectButton,
-    sectionProject,
-    "Create New Project",
-    e.target.value
-  );
+  localStorage.setItem("currentPage", e.target.textContent);
+  setupToDoPage(createProjectButton, sectionProject, e.target.value);
 };
 
-// listens for add todo button clicks
-export const projectHeadBtnListener = () => {
-  setupFormPage(createProjectButton, sectionProject, "Go To Home");
-  document.querySelector(".project-name")?.remove();
+const completeBtnListener = (element, projectHeadBtn, todoId) => {
+  let projectName = projectHeadBtn.previousElementSibling.textContent;
+  let projectAllTodo = JSON.parse(localStorage.getItem(projectName));
+  let projectList = JSON.parse(localStorage.getItem("projectList"));
 
-  const pageHead = setupPageHeading("Add Todo");
+  projectAllTodo = projectAllTodo.filter((todo) => todo.id !== todoId);
+
+  if (projectAllTodo.length) {
+    localStorage.setItem(projectName, JSON.stringify(projectAllTodo));
+  } else {
+    localStorage.removeItem(projectName);
+    projectList = projectList.filter((project) => project !== projectName);
+    if (projectList.length) {
+      localStorage.setItem("projectList", JSON.stringify(projectList));
+      localStorage.setItem("currentPage", projectList[0]);
+    } else {
+      localStorage.removeItem("projectList");
+      localStorage.removeItem("currentPage");
+      setupFormPage(createProjectButton, sectionProject);
+    }
+    window.location.reload();
+  }
+
+  element.remove();
 };
 
 // sets up todo page with all its todo and buttons
-export const setupToDoPage = (btn, mainSec, btnText, projectIdx) => {
+// listens for add todo button clicks
+// grey out all the completed
+export const setupToDoPage = (
+  btn,
+  mainSec,
+  projectIdx,
+  btnText = "Create New Project"
+) => {
   toDoPage(btn, mainSec, btnText, projectIdx);
 
   const projectHeadBtn = document.querySelector(".projectHead button");
-  projectHeadBtn.addEventListener("click", projectHeadBtnListener);
+  projectHeadBtn.addEventListener("click", () => {
+    setupFormPage(createProjectButton, sectionProject);
+    document.querySelector(".project-name")?.remove();
+    setupPageHeading("Add ToDo");
+  });
+
+  const todoDiv = document.querySelectorAll(".todo");
+  todoDiv.forEach((node) => {
+    let todoDetail = node.children[0];
+    let todoId = node.dataset.id;
+    
+    todoDetail.addEventListener("click", () => {
+      setupFormPage(createProjectButton, sectionProject);
+      document.querySelector(".project-name")?.remove();
+      setupPageHeading("Edit ToDo");
+
+      let currentTodoList = JSON.parse(
+        localStorage.getItem(localStorage.getItem("currentPage"))
+      );
+      localStorage.setItem("editId", todoId)
+
+      const currentTodo = currentTodoList.find(todo => todo.id === todoId)
+
+      const formNodes = document.querySelectorAll("input, textarea, select");
+      formNodes.forEach((element) => (element.value = currentTodo[element.id]));
+    });
+
+    let completeBtn = node.children[1];
+    completeBtn.addEventListener("click", () =>
+      completeBtnListener(node, projectHeadBtn, todoId)
+    );
+  });
 };
 
-export const setupFormPage = (btn, formSec, btnText) => {
+export const setupFormPage = (btn, formSec, btnText = "Go To Home") => {
   formPage(btn, formSec, btnText);
 
   const formBtn = document.querySelector("form button");
@@ -66,5 +122,5 @@ export const setupPageHeading = (text) => {
   const pageHead = document.querySelector(".projectHead");
   pageHead.children[0].innerText = text;
 
-  return pageHead
-}
+  return pageHead;
+};

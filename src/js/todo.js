@@ -84,7 +84,7 @@ export class Todo {
     if (dueDate < today) {
       throw new Error("Due date can be today or upcomming date.");
     } else {
-      this.#dueDate = new Date(value);
+      this.#dueDate = new Date(value).toLocaleDateString("en-IN", option);
     }
   }
 

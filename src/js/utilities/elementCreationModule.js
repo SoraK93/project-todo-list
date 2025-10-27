@@ -68,6 +68,7 @@ export const toDoCreation = (function () {
   const createToDo = function (parent, toDoObject) {
     const toDoContainer = createElementContainer(parent, "div");
     toDoContainer.classList.add("todo", toDoObject.priority);
+    toDoContainer.setAttribute("data-id", toDoObject.id);
 
     const detailContainer = createElementContainer(toDoContainer, "div");
     createElementContainer(detailContainer, "h3", toDoObject.title);

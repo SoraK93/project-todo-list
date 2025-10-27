@@ -19,18 +19,34 @@ export const projects = (function () {
       todoList = JSON.parse(storedTodos);
     } else {
       projectList = JSON.parse(storedProjects) || [];
-      console.log({ projectList });
-      projectList.push(todo["project-name"]);
+      projectList.unshift(todo["project-name"]);
       localStorage.setItem("projectList", JSON.stringify(projectList));
     }
 
     todoList.push(newTodo);
 
     localStorage.setItem(todo["project-name"], JSON.stringify(todoList));
-    console.log({ storedProjects, storedTodos });
   };
+
+  const updateProject = function(todo, id) {
+    // let storedProjects = localStorage.getItem("projectList");
+    let storedTodos = JSON.parse(localStorage.getItem(todo["project-name"]));
+    let index = storedTodos.findIndex(element => element.id === id)
+
+    let newTodo = new Todo();
+    newTodo.title = todo.title;
+    newTodo.description = todo.description;
+    newTodo.note = todo.note;
+    newTodo.dueDate = todo.dueDate;
+    newTodo.priority = todo.priority;
+
+    storedTodos[index] = newTodo
+
+    localStorage.setItem(todo["project-name"], JSON.stringify(storedTodos))
+  }
 
   return {
     createNewProject,
+    updateProject
   };
 })();

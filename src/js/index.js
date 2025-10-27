@@ -21,11 +21,10 @@ if (localStorage.length) {
   setupToDoPage(
     createProjectButton,
     sectionProject,
-    "Create New Project",
     getKeys()
   );
 } else {
-  setupFormPage(createProjectButton, sectionProject, "Go To Home");
+  setupFormPage(createProjectButton, sectionProject);
 }
 
 // Change page based on user interaction

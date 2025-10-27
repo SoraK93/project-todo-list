@@ -88,9 +88,8 @@ li {
 }
 
 .todo div {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
   cursor: pointer;
   padding: 1em;
@@ -182,7 +181,9 @@ form div.addButton {
   margin-left: auto;
 }
 
-form input, select, textarea {
+form input,
+select,
+textarea {
   border-bottom: 1px solid grey;
   background: var(--bg-form-input);
   color: rgb(80, 78, 78);
@@ -190,11 +191,10 @@ form input, select, textarea {
   padding: 0.3em;
 }
 
-form select#priority  {
+form select#priority {
   border: solid 1px var(--bg-form-input-border);
 }
 
 form textarea {
   resize: vertical;
 }
-

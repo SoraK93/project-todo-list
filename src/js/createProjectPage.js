@@ -13,9 +13,7 @@ export const formPage = (button, parentElement, text) => {
 };
 
 export const toDoPage = (button, parentElement, text, projectIndex) => {
-  let projectName = JSON.parse(localStorage.getItem("projectList"))[
-    projectIndex
-  ];
+  let projectName = JSON.parse(localStorage.getItem("projectList"))[projectIndex];
   button.innerText = text;
   parentElement.innerHTML = "";
   parentElement.appendChild(projectHeadContainer(projectName));
@@ -24,10 +22,6 @@ export const toDoPage = (button, parentElement, text, projectIndex) => {
   todoListContainer.className = "todoList";
 
   let currTodo = JSON.parse(localStorage.getItem(projectName));
-  if (!currTodo) {
-    createToDo(todoListContainer, {});
-    return;
-  }
   for (let key of currTodo) {
     createToDo(todoListContainer, key);
   }
@@ -37,8 +31,10 @@ export const toDoPage = (button, parentElement, text, projectIndex) => {
 
 export const sidebar = (projectList) => {
   projectList.innerHTML = "";
+  
   let savedProjects = JSON.parse(localStorage.getItem("projectList"));
   if (!savedProjects) return;
+  
   for (let i = 0; i < savedProjects.length; i++) {
     let listElement = document.createElement("li");
     listElement.innerText = savedProjects[i];
